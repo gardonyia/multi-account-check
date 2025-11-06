@@ -11,7 +11,7 @@ st.markdown("### 1️⃣ Töltsd fel a **Korábban törölt játékosok (Deleted
 deleted_file = st.file_uploader("Korábban töröltek CSV feltöltése", type="csv")
 
 if deleted_file:
-    deleted_df = pd.read_csv(deleted_file)
+    deleted_df = pd.read_csv(deleted_file, sep=None, engine="python")
 
     if 'Personal ID' not in deleted_df.columns:
         st.error("❌ A feltöltött fájlban nincs 'Personal ID' oszlop.")
@@ -29,7 +29,7 @@ if deleted_file:
         new_file = st.file_uploader("Tegnap regisztráltak CSV feltöltése", type="csv")
 
         if new_file:
-            new_df = pd.read_csv(new_file)
+            new_df = pd.read_csv(new_file, sep=None, engine="python")
 
             if not {'Personal ID', 'User ID'}.issubset(new_df.columns):
                 st.error("❌ A második fájlban nincs meg mindkét oszlop: 'Personal ID' és 'User ID'.")
@@ -59,3 +59,4 @@ if deleted_file:
                     )
                 else:
                     st.info("✅ Nincs egyezés a két fájl között.")
+

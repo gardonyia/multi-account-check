@@ -6,7 +6,7 @@ st.set_page_config(page_title="Többszörös fiókellenőrző", page_icon="🔍"
 
 st.title("🔍 Multi Account Checker")
 
-st.markdown("### 📂 1. lépés: Töltsd fel a **Korábban törölt játékosok (Deleted Players)** CSV fájlt")
+st.markdown("### 📂 1. lépés: Töltsd fel a **Korábban törölt játékosok** .CSV fájlt")
 
 deleted_file = st.file_uploader("Korábban töröltek CSV feltöltése", type="csv")
 
@@ -26,7 +26,7 @@ if deleted_file:
 
             st.success("✅ Deleted Players fájl sikeresen beolvasva és megtisztítva.")
 
-            st.markdown("### 📂 2. lépés: Töltsd fel a **Tegnap regisztráltak** CSV fájlt")
+            st.markdown("### 📂 2. lépés: Töltsd fel a **Tegnap regisztráltak** .CSV fájlt")
             new_file = st.file_uploader("Tegnap regisztráltak CSV feltöltése", type="csv")
 
             if new_file:
@@ -66,4 +66,5 @@ if deleted_file:
 
     except Exception as e:
         st.error(f"⚠️ Hiba történt az első fájl feldolgozásakor: {e}")
+
 

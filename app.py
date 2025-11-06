@@ -13,14 +13,17 @@ deleted_file = st.file_uploader("Korábban töröltek CSV feltöltése", type="c
 if deleted_file:
     deleted_df = pd.read_csv(deleted_file, sep=None, engine="python")
 
-    if 'Personal ID' not in deleted_df.columns:
-        st.error("❌ A feltöltött fájlban nincs 'Personal ID' oszlop.")
-    else:
-        deleted_df['Personal ID'] = (
-            deleted_df['Personal ID']
-            .astype(str)
-            .str.replace(r'_adatved|_adatve|_adatv', '', regex=True)
-        )
+    # Oszlopnevek kis-nagybetű független kezelése
+deleted_df.columns = [c.strip().lower() for c in deleted_df.columns]
+
+if 'personal id' not in deleted_df.columns:
+    st.error("❌ A feltöltött fájlban nincs 'Personal ID' vagy 'Personal Id' oszlop.")
+else:
+    deleted_df['personal id'] = (
+        deleted_df['personal id']
+        .astype(str)
+        .str.replace(r'_adatved|_adatve|_adatv', '', regex=True)
+    )
 
         st.success("✅ Deleted Players fájl sikeresen beolvasva és megtisztítva.")
 
@@ -59,4 +62,5 @@ if deleted_file:
                     )
                 else:
                     st.info("✅ Nincs egyezés a két fájl között.")
+
 

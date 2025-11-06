@@ -34,7 +34,8 @@ else:
         if new_file:
             new_df = pd.read_csv(new_file, sep=None, engine="python")
 
-            if not {'Personal ID', 'User ID'}.issubset(new_df.columns):
+            new_df.columns = [c.strip().lower() for c in new_df.columns]
+if not {'personal id', 'user id'}.issubset(new_df.columns):
                 st.error("❌ A második fájlban nincs meg mindkét oszlop: 'Personal ID' és 'User ID'.")
             else:
                 total_regs = len(new_df)
@@ -62,5 +63,6 @@ else:
                     )
                 else:
                     st.info("✅ Nincs egyezés a két fájl között.")
+
 
 

@@ -4,7 +4,7 @@ from io import BytesIO
 
 st.set_page_config(page_title="Többszörös fiókellenőrző", page_icon="🔍")
 
-st.title("🔍 Multi Account Checker")
+st.title("🔍 TPRO - Multi Account Checker")
 
 st.markdown("### 📂 1. lépés: Töltsd fel a **Korábban törölt játékosok** .CSV fájlt")
 
@@ -66,5 +66,6 @@ if deleted_file:
 
     except Exception as e:
         st.error(f"⚠️ Hiba történt az első fájl feldolgozásakor: {e}")
+
 
 

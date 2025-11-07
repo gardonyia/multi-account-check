@@ -38,7 +38,36 @@ if deleted_file:
                         st.error("❌ A feltöltött fájlban nincs 'Personal ID' és 'User ID' oszlop.")
                     else:
                         total_new = new_df['personal id'].nunique()
-                        matches = new_df[new_df['personal id'].isin(deleted_df['personal id'])]
+                        # Összevetjük a két fájlt Personal ID alapján
+matches = new_df[new_df['Personal ID'].isin(deleted_df['Personal ID'])]
+
+# A régi (törölt) User ID-kat hozzárendeljük az újhoz
+merged = pd.merge(
+    matches,
+    deleted_df[['Personal ID', 'User ID']],
+    on='Personal ID',
+    how='left',
+    suffixes=('_new', '_old')
+)
+
+# Ha több törölt User ID is volt ugyanahhoz a Personal ID-hoz, azokat összevonjuk
+merged_grouped = merged.groupby(
+    ['Personal ID', 'User ID_new'], as_index=False
+).agg({'User ID_old': lambda x: ', '.join(x.astype(str).unique())})
+
+# Megmutatjuk az eredményt
+st.dataframe(merged_grouped)
+
+# Excel exporthoz
+output = BytesIO()
+with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
+    merged_grouped.to_excel(writer, index=False, sheet_name='Találatok')
+st.download_button(
+    label="📊 Eredmények letöltése Excel formátumban",
+    data=output.getvalue(),
+    file_name="multi_account_check_results.xlsx",
+    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+)
                         match_count = matches.shape[0]
 
                         st.markdown(f"### 📊 Eredmény")
@@ -66,6 +95,7 @@ if deleted_file:
 
     except Exception as e:
         st.error(f"⚠️ Hiba történt az első fájl feldolgozásakor: {e}")
+
 
 
 

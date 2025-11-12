@@ -75,7 +75,7 @@ if deleted_file:
 
                         # Eredmények megjelenítése
                         st.success(f"📊 Új regisztrációk száma: **{total_new}**")
-                        st.warning(f"⚠️ Ezek közül a korábban töröltek között megtalálható: **{match_count}**")
+                        st.warning(f"⚠️ Új regisztrációk között a korábban töröltek között megtalálható: **{match_count}**")
 
                         st.markdown("### 📋 Többszörös regisztrációk")
                         st.dataframe(merged_grouped)
@@ -97,6 +97,7 @@ if deleted_file:
 
     except Exception as e:
         st.error(f"Hiba történt az első fájl feldolgozásakor: {e}")
+
 
 
 

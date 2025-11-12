@@ -3,9 +3,9 @@ import pandas as pd
 from io import BytesIO
 
 # Alap beállítások
-st.set_page_config(page_title="Többszörös fiókellenőrzés", page_icon="🔍")
+st.set_page_config(page_title="TPRO - Multi Account Checker", page_icon="🔍")
 
-st.title("🔍 Többszörös fiókellenőrző eszköz")
+st.title("🔍 TPRO - Multi Account Checker")
 
 st.markdown("### 1️⃣ Töltsd fel a **Korábban törölt játékosok (Deleted Players)** CSV fájlt")
 
@@ -97,3 +97,4 @@ if deleted_file:
 
     except Exception as e:
         st.error(f"Hiba történt az első fájl feldolgozásakor: {e}")
+

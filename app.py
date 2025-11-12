@@ -7,7 +7,7 @@ st.set_page_config(page_title="TPRO - Multi Account Checker", page_icon="🔍")
 
 st.title("🔍 TPRO - Multi Account Checker")
 
-st.markdown("### 1️⃣ Töltsd fel a **korábban törölt játékosok (Deleted Players)** CSV fájlt")
+st.markdown("### 1️⃣ Töltsd fel a **korábban törölt játékosok adatait tartalmazó .csv fájlt (DataMatrix-USZ_deleted_rquest_by_player riport)")
 
 deleted_file = st.file_uploader("Korábban töröltek CSV feltöltése", type="csv")
 
@@ -97,5 +97,6 @@ if deleted_file:
 
     except Exception as e:
         st.error(f"Hiba történt az első fájl feldolgozásakor: {e}")
+
 
 

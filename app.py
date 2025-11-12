@@ -30,9 +30,9 @@ if deleted_file:
                 .str.strip()
             )
 
-            st.success("✅ Deleted Players fájl sikeresen beolvasva és megtisztítva.")
+            st.success("✅ A korábban törölt játékosok adatai sikeresen beolvasva és megtisztítva.")
 
-            st.markdown("### 2️⃣ Töltsd fel a **Tegnap regisztráltak** CSV fájlt")
+            st.markdown("### 2️⃣ Töltsd fel a **tegnap regisztráltak** adatait tartalmazó .csv fájlt (DataMatrix-Reg_yesterday)")
 
             new_file = st.file_uploader("Tegnap regisztráltak CSV feltöltése", type="csv")
 
@@ -97,6 +97,7 @@ if deleted_file:
 
     except Exception as e:
         st.error(f"Hiba történt az első fájl feldolgozásakor: {e}")
+
 
 
 
